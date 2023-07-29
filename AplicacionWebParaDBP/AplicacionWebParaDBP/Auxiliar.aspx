@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
- <form id="miFormulario" runat="server">
+    <form id="miFormulario" runat="server">
         <asp:ScriptManager runat="server"></asp:ScriptManager>
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -45,47 +45,114 @@
             <h3>Mostrar desde Sesiones</h3>
             <!-- Espacios para mostrar la información de sesión -->
             <div>
-                <strong>Nombre:</strong> <asp:Label ID="lblNombre" runat="server" CssClass="text-info"></asp:Label>
+                <strong>Nombre:</strong>
+                <asp:Label ID="lblNombre" runat="server" CssClass="text-info"></asp:Label>
             </div>
             <div>
-                <strong>Apellidos:</strong> <asp:Label ID="lblApellidos" runat="server" CssClass="text-info"></asp:Label>
+                <strong>Apellidos:</strong>
+                <asp:Label ID="lblApellidos" runat="server" CssClass="text-info"></asp:Label>
             </div>
             <div>
-                <strong>Sexo:</strong> <asp:Label ID="lblSexo" runat="server" CssClass="text-info"></asp:Label>
+                <strong>Sexo:</strong>
+                <asp:Label ID="lblSexo" runat="server" CssClass="text-info"></asp:Label>
             </div>
             <div>
-                <strong>Direccion:</strong> <asp:Label ID="lblDireccion" runat="server" CssClass="text-info"></asp:Label>
+                <strong>Direccion:</strong>
+                <asp:Label ID="lblDireccion" runat="server" CssClass="text-info"></asp:Label>
             </div>
             <div>
-                <strong>Ciudad:</strong> <asp:Label ID="lblCiudad" runat="server" CssClass="text-info"></asp:Label>
+                <strong>Ciudad:</strong>
+                <asp:Label ID="lblCiudad" runat="server" CssClass="text-info"></asp:Label>
             </div>
 
         </div>
-     <div class="container">
-    <h2>Registro de Alumno</h2>
-    <h3>Mostrar desde la Cookies</h3>
-    <!-- Agregar el botón para mostrar las cookies -->
-    <div>
-        <asp:Button ID="btnMostrarCookies" runat="server" Text="Mostrar Cookies" OnClick="btnMostrarCookies_Click" CssClass="btn btn-primary" />
-    </div>
-    <!-- Espacios para mostrar la información de sesión -->
-    <div>
-        <strong>Nombre:</strong> <asp:Label ID="Label1" runat="server" CssClass="text-info"></asp:Label>
-    </div>
-    <div>
-        <strong>Apellidos:</strong> <asp:Label ID="Label2" runat="server" CssClass="text-info"></asp:Label>
-    </div>
-    <div>
-        <strong>Sexo:</strong> <asp:Label ID="Label3" runat="server" CssClass="text-info"></asp:Label>
-    </div>
-    <div>
-        <strong>Direccion:</strong> <asp:Label ID="Label4" runat="server" CssClass="text-info"></asp:Label>
-    </div>
-    <div>
-        <strong>Ciudad:</strong> <asp:Label ID="Label5" runat="server" CssClass="text-info"></asp:Label>
-    </div>
+        <div class="container">
+            <h2>Registro de Alumno</h2>
+            <h3>Mostrar desde la Cookies desde ASP</h3>
+            <!-- Agregar el botón para mostrar las cookies -->
+            <div>
+                <asp:Button ID="btnMostrarCookies" runat="server" Text="Mostrar Cookies" OnClick="btnMostrarCookies_Click" CssClass="btn btn-primary" />
+            </div>
+            <!-- Espacios para mostrar la información de sesión -->
+            <div>
+                <strong>Nombre:</strong>
+                <asp:Label ID="Label1" runat="server" CssClass="text-info"></asp:Label>
+            </div>
+            <div>
+                <strong>Apellidos:</strong>
+                <asp:Label ID="Label2" runat="server" CssClass="text-info"></asp:Label>
+            </div>
+            <div>
+                <strong>Sexo:</strong>
+                <asp:Label ID="Label3" runat="server" CssClass="text-info"></asp:Label>
+            </div>
+            <div>
+                <strong>Direccion:</strong>
+                <asp:Label ID="Label4" runat="server" CssClass="text-info"></asp:Label>
+            </div>
+            <div>
+                <strong>Ciudad:</strong>
+                <asp:Label ID="Label5" runat="server" CssClass="text-info"></asp:Label>
+            </div>
 
-</div>
+        </div>
+        <div class="container">
+            <h2>Registro de Alumno</h2>
+            <h3>Mostrar cookies desde JS</h3>
+            <!-- Agregar el botón para mostrar las cookies -->
+            <div>
+                <input type="button" value="Mostrar Cookies" onclick="mostrarCookies()" class="btn btn-primary" />
+            </div>
+            <!-- Espacios para mostrar la información de las cookies -->
+            <div>
+                <strong>Nombre:</strong>
+                <span id="nombre" class="text-info"></span>
+            </div>
+            <div>
+                <strong>Apellidos:</strong>
+                <span id="apellidos" class="text-info"></span>
+            </div>
+            <div>
+                <strong>Sexo:</strong>
+                <span id="sexo" class="text-info"></span>
+            </div>
+            <div>
+                <strong>Direccion:</strong>
+                <span id="direccion" class="text-info"></span>
+            </div>
+            <div>
+                <strong>Ciudad:</strong>
+                <span id="ciudad" class="text-info"></span>
+            </div>
+        </div>
+
+        <script>
+            function mostrarCookies() {
+                // Function to retrieve the value of a cookie
+                function getCookie(cookieName) {
+                    const name = cookieName + "=";
+                    const decodedCookie = decodeURIComponent(document.cookie);
+                    const cookieArray = decodedCookie.split(';');
+                    for (let i = 0; i < cookieArray.length; i++) {
+                        let cookie = cookieArray[i];
+                        while (cookie.charAt(0) === ' ') {
+                            cookie = cookie.substring(1);
+                        }
+                        if (cookie.indexOf(name) === 0) {
+                            return cookie.substring(name.length, cookie.length);
+                        }
+                    }
+                    return "";
+                }
+
+                // Retrieve and display the values from cookies
+                document.getElementById('nombre').innerText = getCookie('Nombre');
+                document.getElementById('apellidos').innerText = getCookie('Apellido');
+                document.getElementById('sexo').innerText = getCookie('Sexo');
+                document.getElementById('direccion').innerText = getCookie('Direccion');
+                document.getElementById('ciudad').innerText = getCookie('Ciudad');
+            }
+        </script>
 
         <footer class="border-top footer text-muted">
             <div class="container">
